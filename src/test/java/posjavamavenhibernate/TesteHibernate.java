@@ -75,7 +75,7 @@ public class TesteHibernate {
 
 	// TESTE DE DELETE*/
 	@Test
-	public void testeDelete() {
+	public void testeDelete() throws Exception {
 
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 

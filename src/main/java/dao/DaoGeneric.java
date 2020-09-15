@@ -44,14 +44,18 @@ public class DaoGeneric<E> {
 
 	/* CONSULTA 02 */
 	public E pesquisar(Long id, Class<E> entidade) {
-
-		E e = (E) entityManager.find(entidade, id);
+        
+		//AJUSTANDO PARA CARREGAR OS DADOS DO TELEFONE USUARIO
+		//E e = (E) entityManager.find(entidade, id);
+		//CORRE~ÇÃO PARA NAO TRAZER OS DADOS EM MEMORIA
+		entityManager.clear();//LIMPAR O QUE ESTIVER EM MEMORIA
+		E e = (E) entityManager.createQuery("from " + entidade.getSimpleName() + " where id = " + id).getSingleResult();
 		return e;
 
 	}
 	/* DELETE */
 
-	public void deletarPorId(E entidade) {
+	public void deletarPorId(E entidade) throws Exception{
 
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 
